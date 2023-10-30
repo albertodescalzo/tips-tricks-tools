@@ -1,0 +1,2 @@
+Look at `https://medium.com/@reishim0731/ssh-connection-and-screen-sharing-raspberry-pi-in-a-mac-environment-e191271f3d07` to set up ssh connection to your new Raspberry Pi.
+

@@ -1,0 +1,5 @@
+grep -B 2 -A 2 "example" file.txt
+--> -B: lines before; -A: lines after
+
+grep -o 'KIR[^[:space:]]*' your_file.tsv
+--> print all matched words starting with KIR 

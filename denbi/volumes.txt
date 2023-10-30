@@ -1,0 +1,12 @@
+lsblk -o NAME,SIZE,MOUNTPOINT,FSTYPE,TYPE | egrep -v "^loop"
+---> collect device name
+
+
+
+sudo mkdir -p /vol/RENAME_ME
+sudo mount /dev/device_name /vol/RENAME_ME
+sudo chown -R ubuntu:ubuntu /vol/RENAME_ME
+
+Alternatively, for SLURM cluster version:
+sudo mkdir -p ~/vol/spool/whopper
+sudo mount /dev/vdb ~/vol/spool/whopper/

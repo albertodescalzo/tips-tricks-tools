@@ -1,0 +1,132 @@
+Docu: https://docs.s3it.uzh.ch/how-to_articles/how_to_run_snakemake/
+
+sinfo 
+--> show info of worker nodes
+
+sinfo -N
+
+sbatch --help
+squeue  --help
+
+wget https://github.com/conda-forge/miniforge/releases/download/23.3.1-1/Mambaforge-23.3.1-1-Linux-x86_64.sh
+chmod +x Mambaforge-23.3.1-1-Linux-x86_64.sh
+./Mambaforge-23.3.1-1-Linux-x86_64.sh
+
+mamba env create -f snakemake_cluster.yml
+
+--------------------   snakemake_cluster.yml ----------------
+name: snakemake_cluster
+channels:
+   - conda-forge
+   - bioconda
+   - defaults
+dependencies:
+   - python=3.10.5
+   - snakemake-minimal=7.8.2
+-------------------------------------------------------------
+
+
+sbatch run.slurm
+squeue -u $USER
+
+
+mamba activate snakemake
+mamba create -c conda-forge -c bioconda -n snakemake snakemake
+
+--------------------------  run.slurm --------------------
+
+#!/usr/bin/env bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=3850
+#SBATCH --time=1-00:00:00
+#SBATCH --output=log/main_%j
+
+source ~/mambaforge/etc/profile.d/conda.sh
+conda activate snakemake
+
+snakemake --profile ./env/slurm "$@"
+
+-----------------------------------------
+
+Alternatively, to execute my pipeline: 
+    sbatch run-slurm download_data --use-conda --cores 28 
+
+-------------------------  run-slurm ----------------     
+#!/usr/bin/env bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=3850
+#SBATCH --time=1-00:00:00
+#SBATCH --output=log/main_%j
+
+snakemake --profile ../config "$@"
+
+-----------------------------------------------------
+https://github.com/snakemake/snakemake/issues/134
+--> submitting snamemake job directly from command line
+
+snakemake -k -p -j 500 -w 15 --max-jobs-per-second 5 --rerun-incomplete --stats stats.$(date +%F-%H%M).json \
+  --cluster "sbatch --parsable -o 'slurmOut/slurm-%j-%x.out' --mem=20000 -p 'batch' --cpus-per-task=1 --nodes=1 -t 1-00:00:00 --job-name='test'" 
+
+
+https://hpc-docs.cubi.bihealth.org/first-steps/episode-0/
+--> tutorial series for SLURM clusters in an HPC
+
+mkdir -p /home/ubuntu/vol/spool/graph-genome-workbench/evaluation_pipeline/SLURMlogs
+scancel -p debug
+
+-------- Additional things for the cluster execution -------
+1. create SLURMlogs and SLURMlogs/jobs
+
+2. Add the run-slurm
+
+#!/usr/bin/env bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=1G
+#SBATCH --time=01:00:00
+#SBATCH --output=SLURMlogs/job_%j
+
+source ~/mambaforge/etc/profile.d/conda.sh
+conda activate snakemake
+
+set -x
+
+snakemake --profile ./profiles/slurm "$@"
+
+
+3. Create profiles/slurm/config.yaml
+
+jobs: 20
+
+cluster: >-
+    sbatch
+    --nodes 1
+    --ntasks 10
+    --cpus-per-task {resources.threads}
+    --mem {resources.mem_mb}
+    --time {resources.time}
+    -o SLURMlogs/jobs/{rule}_%j.out
+    -e SLURMlogs/jobs/{rule}_%j.err
+    --job-name {rule}
+    --time "00:05:00"
+
+default-resources:
+    - threads=1
+    - mem_mb=3850
+    - time="00:05:00"
+
+######### Alternatively: #########
+
+default:
+    cores: "{threads}"
+    mem_mb: "{resources.mem_total_mb}"
+    name: "{jobid}_{rule}"
+    output: "SLURMlogs/jobs/{jobid}_{rule}.stdout"
+    error: "SLURMlogs/jobs/{jobid}_{rule}.stderr"
+    run_hrs: "{resources.runtime_hrs}"
+    run_min: "{resources.runtime_min}"
+
+
+scontrol show partition debug
+
+
+

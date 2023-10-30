@@ -1,0 +1,10 @@
+https://www.coursera.support/s/article/360004990332-Download-Jupyter-Workspace-files?language=en_US#:~:text=In%20the%20file%20view%2C%20select,which%20is%20yours%20to%20keep.
+--> commands to download .tar.gz files
+tar -czvf folder_name.tar.gz folder_to_zip
+
+
+
+
+
+
+

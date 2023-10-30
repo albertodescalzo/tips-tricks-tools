@@ -97,3 +97,22 @@ rule copy_files_ref:
         """
         cp {input.ref} {output.ref}
         """
+
+
+---------------------------------------- Alternative ------------------------------
+## Copy files from a folder to another folder ()= copy-files-iteratively.smk)
+
+rule copy_folders:
+    input:
+        folder1="/vol/whopper/genotyping-pipelines/benchmarking-pipeline"
+    output:
+        folder1=directory("/vol/whopper/graph-genome-workbench/evaluation_pipeline")
+    params:
+        exclude1a="results/",
+        exclude1b=".venv/",
+        exclude1c=".theia/",
+        exclude1d=".snakemake/"
+    shell:
+        """
+        rsync -av --exclude='{params.exclude1a}' --exclude='{params.exclude1b}' --exclude='{params.exclude1c}' --exclude='{params.exclude1d}' {input.folder1}/ {output.folder1}
+        """

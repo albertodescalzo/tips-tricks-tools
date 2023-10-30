@@ -1,0 +1,15 @@
+git config --global user.email "aldes101@hhu.de"
+git config --global user.name "albertodescalzo"
+git remote set-url origin git@github.com:DiltheyLab/graph-genome-workbench.git
+git config pull.rebase false
+--> merge branches - default strategy
+
+New SSH access: 
+---> https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+Basically:
+steps above
+ssh-keygen -t ed25519 -C "aldes101@hhu.de"
+--> alternatively ssh-keygen -t rsa -b 4096 -C "aldes101@hhu.de"
+chmod 400 /home/ubuntu/.ssh/id_ed25519
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519

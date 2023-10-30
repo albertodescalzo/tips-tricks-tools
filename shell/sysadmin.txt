@@ -1,0 +1,22 @@
+sudo -i 
+--> starts an interactive shell with superuser privileges
+
+:!mkdir -p <folder_absolute_path>
+--> use it in Vim it the file you're writing to will be in a folder that doesn't exist
+and then the usual :wq
+
+In a SLURM cluster, the deleted data goes into the ~/.local/share/Trash/files
+
+Copy files from local to VM:
+scp -r /path/to/local/folder username@vm_ip:/path/to/remote/directory/
+scp -r /Users/descalzo/Documents/HHU/master_thesis/master_thesis_results/test_final/copy_code ubuntu@democliphy:/home/ubuntu/democliphy/
+scp ubuntu@democliphy:/home/ubuntu/.ssh/id_ed25519.pub /Users/descalzo/Documents/ssh_keys/Github/democliphy/
+scp -r ubuntu@democliphy:/home/ubuntu/data/ /Users/descalzo/Documents/HHU/master_thesis/anonymized_data/
+
+scp -r /Users/descalzo/Documents/ssh_keys/Github/democliphy/* ubuntu@democliphy:/home/ubuntu/.ssh/
+scp -r /Users/descalzo/Documents/HHU/master_thesis/anonymized_data/* ubuntu@democliphy:/home/ubuntu/
+
+
+sudo cp ~/.ssh/authorized_keys /root/.ssh/
+--> useful to access ec2 instances through username=root, instead of ubuntu 
+
