@@ -1,0 +1,5 @@
+ip: 192.168.0.129
+cores: 28
+memory: 65536
+hostname: bibigrid-worker-1-1-9x4sajtjrx2mz3o
+ephemerals: []

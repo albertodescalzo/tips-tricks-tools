@@ -1,0 +1,14 @@
+- hosts: masternode
+  become: true
+  vars_files:
+  - vars/nfs-vars.yml
+  roles:
+  - master
+  
+- hosts: workers
+  become: true
+  vars_files:
+  - vars/nfs-vars.yml
+  roles:
+  - worker
+  

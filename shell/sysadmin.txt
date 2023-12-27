@@ -20,3 +20,6 @@ scp -r /Users/descalzo/Documents/HHU/master_thesis/anonymized_data/* ubuntu@demo
 sudo cp ~/.ssh/authorized_keys /root/.ssh/
 --> useful to access ec2 instances through username=root, instead of ubuntu 
 
+pkill -f "python /vol/whopper/KIRgenotyping/kmer_approach_.snakemake/scripts/"
+pgrep -fl "python /vol/whopper/KIRgenotyping/kmer_approach_.snakemake/scripts/"
+--> killing processes

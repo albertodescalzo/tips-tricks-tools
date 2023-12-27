@@ -1,0 +1,6 @@
+[master]
+masterCluster
+
+[workers]
+node1Cluster
+node2Cluster

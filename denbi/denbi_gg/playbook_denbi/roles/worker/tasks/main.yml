@@ -1,0 +1,9 @@
+- debug:
+    msg: "Setup NFS"
+  when:
+    - enable_nfs == 'yes'
+- include_tasks: nfs.yml
+  when: enable_nfs == 'yes'
+  tags: ['nfs','worker-nfs']
+
+

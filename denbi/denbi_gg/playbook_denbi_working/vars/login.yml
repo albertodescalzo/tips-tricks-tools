@@ -1,0 +1,4 @@
+mode: openstack
+default_user: albertogarcia
+ssh_user: ubuntu
+munge_key: 7b772d7efe3681eb866949226e01c0c4e10def73566feede777246d7ac72e1b1

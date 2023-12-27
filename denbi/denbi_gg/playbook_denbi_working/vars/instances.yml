@@ -1,0 +1,18 @@
+master:
+  ip: 192.168.0.220
+  hostname: bibigrid-master-9x4sajtjrx2mz3o
+  cores: 4
+  memory: 8192
+  ephemerals: []
+workers:
+- ip: 192.168.0.38
+  cores: 28
+  memory: 65536
+  hostname: bibigrid-worker-1-2-9x4sajtjrx2mz3o
+  ephemerals: []
+- ip: 192.168.0.129
+  cores: 28
+  memory: 65536
+  hostname: bibigrid-worker-1-1-9x4sajtjrx2mz3o
+  ephemerals: []
+deletedWorkers: []

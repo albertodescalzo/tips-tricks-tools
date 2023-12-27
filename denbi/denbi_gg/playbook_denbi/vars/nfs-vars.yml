@@ -1,0 +1,35 @@
+CIDR: 192.168.1.0/24
+local_fs: xfs
+enable_nfs: 'yes'
+local_dns_lookup: 'no'
+enable_gridengine: 'no'
+enable_slurm: 'yes'
+use_master_as_compute: 'no'
+enable_zabbix: 'no'
+enable_ide: 'no'
+nfs_mounts:
+- src: /vol/whopper
+  dst: /vol/whopper
+ext_nfs_mounts: []
+slurmConf:
+  db: slurm
+  db_user: slurm
+  db_password: changeme
+master:
+  ip: 192.168.0.220
+  hostname: bibigrid-master-9x4sajtjrx2mz3o
+  cores: 4
+  memory: 8192
+  ephemerals: []
+workers:
+- ip: 192.168.0.38
+  cores: 28
+  memory: 65536
+  hostname: bibigrid-worker-1-2-9x4sajtjrx2mz3o
+  ephemerals: []
+- ip: 192.168.0.129
+  cores: 28
+  memory: 65536
+  hostname: bibigrid-worker-1-1-9x4sajtjrx2mz3o
+  ephemerals: []
+deletedWorkers: []

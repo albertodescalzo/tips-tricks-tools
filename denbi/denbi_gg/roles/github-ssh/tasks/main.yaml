@@ -1,0 +1,5 @@
+# - name: Download mamba.
+#   ansible.builtin.get_url:
+#     url: 'https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh'
+#     dest: /tmp/mamba.sh
+#     mode: 0744

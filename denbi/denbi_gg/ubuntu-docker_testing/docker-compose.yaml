@@ -1,0 +1,15 @@
+### We want to deploy a container with ubuntu (e.g. 20.04) and mount the denbi file with my public and private keys in order to access the VM in de.NBI and install the software from Ubuntu (instead of Mac)
+
+version: '3.9'
+
+services:
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Path to your Dockerfile containing the Ubuntu image as well as the installed python, 
+    volumes:
+      - /Users/descalzo/Documents/ssh_keys/deNBI:/home/ubuntu/denbikeys
+    container_name: my-ubuntu
+    command: tail -f /dev/null ## so that the container never exits, unless manually specified
+
+

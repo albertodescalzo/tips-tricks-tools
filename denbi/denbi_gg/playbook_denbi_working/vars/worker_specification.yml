@@ -1,0 +1,5 @@
+BATCH 1:
+  INDEX: 1
+  TYPE: de.NBI large
+  IMAGE: ubuntu20.04 de.NBI (C) Worker (2023-08-23)
+  NETWORK: portalexternalnetwork

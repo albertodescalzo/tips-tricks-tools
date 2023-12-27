@@ -1,0 +1,12 @@
+[preciseHopper]
+graphgens
+
+[denbi_vms:children]
+preciseHopper
+
+[masternode]
+masterCluster
+
+[workers]
+node1Cluster
+node2Cluster
